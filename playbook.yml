@@ -1,0 +1,29 @@
+---
+- name: Install fun packages
+  hosts: sukhanov
+  become: yes
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Install packages (Debian/Ubuntu)
+      apt:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - cmatrix
+        - cowsay
+        - sl
+      when: ansible_os_family == 'Debian'
+
+    - name: Install packages (RHEL/CentOS)
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - cmatrix
+        - cowsay
+        - sl
+      when: ansible_os_family == 'RedHat'
