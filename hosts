@@ -1,0 +1,2 @@
+[sukhanov]
+192.168.1.2 ansible_user=username ansible_ssh_pass=password
